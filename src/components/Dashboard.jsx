@@ -1,16 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { getRequest } from "../api/Axios";
+import { CvCard } from "./CvCard";
 
-export const DashBoard = () => {
-  useEffect(() => {
-    getRequest("listCv/62b32d90d8a749231fbb8367").then((z) => {
-      console.log(z.data, "in the zzz");
+export const DashBoard = (props) => {
+  const [cvData, setCvData] = useState([]);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    props.history.push("/");
+    window.location.reload();
+  };
+
+  const handleApiCall = () => {
+    getRequest(`listCv/${props.match.params.id}`).then((response) => {
+      setCvData([...response.data.cv]);
     });
-  });
+  };
+
+  useEffect(() => {
+    handleApiCall();
+  }, []);
+
   return (
     <>
-      <h1>Hello welcome to dashboard</h1>
+      <button
+        onClick={() => {
+          handleLogout();
+        }}
+      >
+        Logout
+      </button>
+      <h5>Hello welcome to dashboard</h5>
+      {cvData &&
+        cvData.map((cv) => {
+          return <CvCard />;
+        })}
     </>
   );
 };

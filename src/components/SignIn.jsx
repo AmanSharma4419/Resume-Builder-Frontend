@@ -1,27 +1,37 @@
 import React, { useState } from "react";
 import { postRequest } from "../api/Axios";
 
-export const SignIn = () => {
+export const SignIn = (props) => {
   const [userFeilds, setuserFeilds] = useState({
     email: "",
     password: "",
   });
+
   const handleuserFeilds = (e) => {
     setuserFeilds({ ...userFeilds, [e.target.name]: e.target.value });
   };
+
+  const handleApiCall = () => {
+    postRequest("signIn/", userFeilds).then((response) => {
+      if (response.data.statusCode === 200) {
+        const { _id } = response.data.data;
+        localStorage.setItem("token", response.data.token);
+        props.history.push(`/dashboard/${_id}`);
+        window.location.reload();
+      }
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = userFeilds;
     if (!email || !password) {
-      alert("Please fill all feilds before submiting");
+      return alert("Please fill all feilds before submiting");
+    } else {
+      handleApiCall();
     }
-    postRequest("signIn/", userFeilds).then((response) => {
-      console.log(response.data.statusCode, "in the response");
-      if (response.data.statusCode === 200) {
-        alert("SignIn successfull");
-      }
-    });
   };
+
   return (
     <>
       <form

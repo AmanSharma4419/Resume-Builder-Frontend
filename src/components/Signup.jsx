@@ -1,29 +1,37 @@
 import React, { useState } from "react";
 import { postRequest } from "../api/Axios";
-
-export const Signup = () => {
+import { GoogleLogin } from "./GoogleLogin";
+export const SignUp = (props) => {
   const [userFeilds, setuserFeilds] = useState({
     name: "",
     email: "",
     password: "",
     phone: "",
   });
+
   const handleuserFeilds = (e) => {
     setuserFeilds({ ...userFeilds, [e.target.name]: e.target.value });
   };
+
+  const handleApiCall = () => {
+    postRequest("signup/", userFeilds).then((response) => {
+      if (response.data.statusCode === 200) {
+        props.history.push("/login");
+        window.location.reload();
+      }
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password, phone } = userFeilds;
     if (!name || !email || !password) {
-      alert("Please fill all feilds before submiting");
+      return alert("Please fill all feilds before submiting");
+    } else {
+      handleApiCall();
     }
-    postRequest("signup/", userFeilds).then((response) => {
-      console.log(response.data.statusCode, "in the response");
-      if (response.data.statusCode === 200) {
-        alert("Hello world");
-      }
-    });
   };
+
   return (
     <>
       <form
@@ -69,6 +77,9 @@ export const Signup = () => {
         />
         <button type="submit">submit</button>
       </form>
+      <div>
+        <GoogleLogin />
+      </div>
     </>
   );
 };

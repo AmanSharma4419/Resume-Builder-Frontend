@@ -2,33 +2,37 @@ import axios from 'axios';
 
 const axiosClient = axios.create();
 
-axiosClient.defaults.baseURL = 'http://localhost:3001/';
+// base url for axios
+axiosClient.defaults.baseURL = 'http://localhost:3000/';
 
+// headers for axios
 axiosClient.defaults.headers = {
+  'Authorization': localStorage.getItem("token"),
   'Content-Type': 'application/json',
   Accept: 'application/json'
 };
 
-// axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
 
-//All request will wait 2 seconds before timeout
+// All request will wait 2 seconds before timeout
 axiosClient.defaults.timeout = 2000;
 
 axiosClient.defaults.withCredentials = true;
 
+// function for all get call api endpoints
 export function getRequest(URL) {
     return axiosClient.get(`/${URL}`)
 }
-  
+// function for all post call api endpoints 
 export function postRequest(URL, payload) {
-  console.log(URL,payload,"kkkk")
     return axiosClient.post(`/${URL}`, payload)
   }
-  
+
+// function for all update call api endpoints
 export function patchRequest(URL, payload) {
     return axiosClient.patch(`/${URL}`, payload).then(response => response);
   }
-  
+
+// function for all delete call api endpoints
 export function deleteRequest(URL) {
     return axiosClient.delete(`/${URL}`).then(response => response);
   }
