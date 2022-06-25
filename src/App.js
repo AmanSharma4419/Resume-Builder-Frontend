@@ -5,9 +5,9 @@ import { getRequest } from "../src/api/Axios";
 
 import {SignIn} from "./components/SignIn"
 import {SignUp} from "./components/SignUp"
-import { NotFound } from './components/NotFound';
+// import { NotFound } from './components/NotFound';
 import { DashBoard } from './components/Dashboard';
-
+import {EditCV} from "./components/EditCV"
 
 function App() {
 const [tokenVerification,setTokenVerification] =  useState(false)
@@ -21,6 +21,7 @@ const privateRoutePath = () => {
   return (
     <>
     <Route path="/dashboard/:id" component={DashBoard} />
+    <Route path="/editCv/:id" component={EditCV} />
     </>
   )
 }

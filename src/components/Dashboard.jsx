@@ -34,7 +34,7 @@ export const DashBoard = (props) => {
       <h5>Hello welcome to dashboard</h5>
       {cvData &&
         cvData.map((cv) => {
-          return <CvCard />;
+          return <CvCard userInfo={cv} />;
         })}
     </>
   );

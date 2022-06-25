@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { postRequest } from "../api/Axios";
 import { GoogleLogin } from "./GoogleLogin";
+import { Link } from "react-router-dom";
 export const SignUp = (props) => {
   const [userFeilds, setuserFeilds] = useState({
     name: "",
@@ -77,6 +78,8 @@ export const SignUp = (props) => {
         />
         <button type="submit">submit</button>
       </form>
+      <a href="/login">login</a>
+      OR
       <div>
         <GoogleLogin />
       </div>
