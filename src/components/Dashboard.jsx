@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "../assets/style/card.css";
 import { getRequest } from "../api/Axios";
 import { CvCard } from "./CvCard";
 
@@ -23,19 +23,24 @@ export const DashBoard = (props) => {
   }, []);
 
   return (
-    <>
-      <button
+    <div className="card-p-d">
+      <p
+        className="logout"
         onClick={() => {
           handleLogout();
         }}
       >
         Logout
-      </button>
-      <h5>Hello welcome to dashboard</h5>
-      {cvData &&
-        cvData.map((cv) => {
-          return <CvCard userInfo={cv} />;
-        })}
-    </>
+      </p>
+      <h5 className="dshboard-title">
+        {`Hello below are cv created by you.`}{" "}
+      </h5>
+      <div className="parent-card-box">
+        {cvData &&
+          cvData.map((cv) => {
+            return <CvCard userInfo={cv} />;
+          })}
+      </div>
+    </div>
   );
 };

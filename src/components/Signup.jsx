@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { postRequest } from "../api/Axios";
 import { GoogleLogin } from "./GoogleLogin";
 import { Link } from "react-router-dom";
+import "../assets/style/signIn.css";
+
 export const SignUp = (props) => {
   const [userFeilds, setuserFeilds] = useState({
     name: "",
@@ -34,55 +36,60 @@ export const SignUp = (props) => {
   };
 
   return (
-    <>
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <input
-          type="text"
-          placeholder="name..."
-          value={userFeilds.name}
-          onChange={(e) => {
-            handleuserFeilds(e);
+    <div className="fome-parent-container">
+      <div className="signUp">
+        <h3 className="title">SignUp </h3>
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
           }}
-          name="name"
-        />
-        <input
-          type="email"
-          placeholder="email..."
-          value={userFeilds.email}
-          onChange={(e) => {
-            handleuserFeilds(e);
-          }}
-          name="email"
-        />
-        <input
-          type="text"
-          placeholder="phone..."
-          value={userFeilds.phone}
-          onChange={(e) => {
-            handleuserFeilds(e);
-          }}
-          name="phone"
-        />
-        <input
-          type="password"
-          placeholder="password..."
-          value={userFeilds.password}
-          onChange={(e) => {
-            handleuserFeilds(e);
-          }}
-          name="password"
-        />
-        <button type="submit">submit</button>
-      </form>
-      <a href="/login">login</a>
-      OR
-      <div>
-        <GoogleLogin />
+        >
+          <input
+            type="text"
+            placeholder="name..."
+            value={userFeilds.name}
+            onChange={(e) => {
+              handleuserFeilds(e);
+            }}
+            name="name"
+          />
+          <input
+            type="email"
+            placeholder="email..."
+            value={userFeilds.email}
+            onChange={(e) => {
+              handleuserFeilds(e);
+            }}
+            name="email"
+          />
+          <input
+            type="phone"
+            placeholder="phone..."
+            value={userFeilds.phone}
+            onChange={(e) => {
+              handleuserFeilds(e);
+            }}
+            name="phone"
+          />
+          <input
+            type="password"
+            placeholder="password..."
+            value={userFeilds.password}
+            onChange={(e) => {
+              handleuserFeilds(e);
+            }}
+            name="password"
+          />
+          <button type="submit">submit</button>
+        </form>
+        <div className="title">
+          <a href="/login">login</a>
+          OR
+          <div>
+            <GoogleLogin />
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 };

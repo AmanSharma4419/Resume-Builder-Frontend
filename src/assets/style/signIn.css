@@ -1,0 +1,52 @@
+.fome-parent-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e9f1ee;
+  width: 690px;
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-top: 60px;
+  padding: 80px 0;
+  /* height: 400px; */
+}
+.signUp {
+    width: 590px;
+}
+.edit {
+  width: 600px;
+}
+.title {
+    margin-top: 8px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #0c2b0c;
+}
+input[type=text],input[type="email"],input[type="password"],input[ type="phone"] {
+    padding: 16px 20px;
+    margin: 12px 0;
+    box-sizing: border-box;
+    width: 100%;
+    outline: none;
+}
+
+button {
+    background-color: #255342;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-transform: capitalize;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  .edit-form {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+  }

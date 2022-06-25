@@ -2,12 +2,12 @@ import './App.css';
 import {useState,useEffect} from "react"
 import { Route, BrowserRouter, Switch,} from "react-router-dom"
 import { getRequest } from "../src/api/Axios";
-
+import {ViewCv} from "./components/ViewCv"
 import {SignIn} from "./components/SignIn"
 import {SignUp} from "./components/SignUp"
 // import { NotFound } from './components/NotFound';
-import { DashBoard } from './components/Dashboard';
-import {EditCV} from "./components/EditCV"
+import { DashBoard } from './components/DashBoard';
+import {EditCV} from "./components/EditCv"
 
 function App() {
 const [tokenVerification,setTokenVerification] =  useState(false)
@@ -22,6 +22,8 @@ const privateRoutePath = () => {
     <>
     <Route path="/dashboard/:id" component={DashBoard} />
     <Route path="/editCv/:id" component={EditCV} />
+    <Route path="/view/:id" component={ViewCv} />
+
     </>
   )
 }

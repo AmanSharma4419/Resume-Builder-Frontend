@@ -1,8 +1,10 @@
+import ReactDOMServer from "react-dom/server";
+import jsPDF from "jspdf";
 import React, { useState, useEffect } from "react";
-import { getRequest, patchRequest } from "../api/Axios";
+import { getRequest } from "../api/Axios";
 import "../assets/style/signIn.css";
 
-export const EditCV = (props) => {
+export const ViewCv = (props) => {
   const [userFeilds, setuserFeilds] = useState({
     name: "",
     email: "",
@@ -20,10 +22,6 @@ export const EditCV = (props) => {
     socialProfiles: [],
   });
 
-  const handleuserFeilds = (e) => {
-    setuserFeilds({ ...userFeilds, [e.target.name]: e.target.value });
-  };
-
   const handleApiCallToListCvInfo = () => {
     getRequest(`getCvById/${props.match.params.id}/`).then((response) => {
       if (response.data.statusCode === 200) {
@@ -31,127 +29,99 @@ export const EditCV = (props) => {
       }
     });
   };
+
   useEffect(() => {
     handleApiCallToListCvInfo();
   }, []);
 
-  const handleApiCall = () => {
-    patchRequest(`updateCv/${props.match.params.id}/`, userFeilds).then(
-      (response) => {
-        if (response.data.statusCode === 200) {
-          window.location.reload();
-        }
-      }
-    );
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleApiCall();
-  };
-
   return (
     <div className="fome-parent-container">
       <div className="edit">
-        <h3 className="title">Edit User Resume</h3>
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
+        <h3 className="title"> User Resume</h3>
+        <form>
+          Name
           <input
             type="text"
             placeholder="name..."
             value={userFeilds.name}
-            onChange={(e) => {
-              handleuserFeilds(e);
-            }}
             name="name"
           />
           <input
             type="email"
             placeholder="email..."
             value={userFeilds.email}
-            onChange={(e) => {
-              handleuserFeilds(e);
-            }}
             name="email"
           />
           <input
             type="text"
             placeholder="phone..."
             value={userFeilds.phoneNumber}
-            onChange={(e) => {
-              handleuserFeilds(e);
-            }}
             name="phoneNumber"
           />
           <input
             type="text"
             placeholder="highesteducationqal..."
             value={userFeilds.highestEducationQal}
-            onChange={(e) => {
-              handleuserFeilds(e);
-            }}
             name="highestEducationQal"
           />
           <input
             type="text"
             placeholder="collegeName..."
             value={userFeilds.collegeName}
-            onChange={(e) => {
-              handleuserFeilds(e);
-            }}
             name="collegeName"
           />
           <input
             type="text"
             placeholder="orgName..."
             value={userFeilds.orgName}
-            onChange={(e) => {
-              handleuserFeilds(e);
-            }}
             name="orgName"
           />
           <input
             type="text"
             placeholder="highesteducationqal..."
             value={userFeilds.highestEducationQal}
-            onChange={(e) => {
-              handleuserFeilds(e);
-            }}
             name="highestEducationQal"
           />
           <input
             type="text"
             placeholder="ctc..."
             value={userFeilds.ctc}
-            onChange={(e) => {
-              handleuserFeilds(e);
-            }}
             name="ctc"
           />
           <input
             type="text"
             placeholder="location..."
             value={userFeilds.location}
-            onChange={(e) => {
-              handleuserFeilds(e);
-            }}
             name="location"
           />
           <input
             type="text"
             placeholder="designation..."
             value={userFeilds.designation}
-            onChange={(e) => {
-              handleuserFeilds(e);
-            }}
             name="designation"
           />
           <button type="submit">submit</button>
         </form>
+        <View />
       </div>
+    </div>
+  );
+};
+
+export const View = () => {
+  const doc = new jsPDF();
+  const Foo = <ViewCv />;
+  const save = () => {
+    doc.html(ReactDOMServer.renderToStaticMarkup(Foo), {
+      callback: () => {
+        doc.save("myDocument.pdf");
+      },
+    });
+  };
+
+  return (
+    <div>
+      <button onClick={save}>save</button>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { postRequest } from "../api/Axios";
+import "../assets/style/signIn.css";
 
 export const SignIn = (props) => {
   const [userFeilds, setuserFeilds] = useState({
@@ -33,32 +34,36 @@ export const SignIn = (props) => {
   };
 
   return (
-    <>
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <input
-          type="email"
-          placeholder="email..."
-          value={userFeilds.email}
-          onChange={(e) => {
-            handleuserFeilds(e);
+    <div className="fome-parent-container">
+      <div>
+        <h3 className="title">SignIn</h3>
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
           }}
-          name="email"
-        />
-        <input
-          type="password"
-          placeholder="password..."
-          value={userFeilds.password}
-          onChange={(e) => {
-            handleuserFeilds(e);
-          }}
-          name="password"
-        />
-        <button type="submit">submit</button>
-      </form>
-    </>
+          className="fome-container"
+        >
+          <input
+            type="email"
+            placeholder="email..."
+            value={userFeilds.email}
+            onChange={(e) => {
+              handleuserFeilds(e);
+            }}
+            name="email"
+          />
+          <input
+            type="password"
+            placeholder="password..."
+            value={userFeilds.password}
+            onChange={(e) => {
+              handleuserFeilds(e);
+            }}
+            name="password"
+          />
+          <button type="submit">submit</button>
+        </form>
+      </div>
+    </div>
   );
 };

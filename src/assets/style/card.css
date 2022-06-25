@@ -1,0 +1,37 @@
+.card-p-d {
+    padding: 0 30px;
+}
+.parent-card-box {
+    display: flex;  
+    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.img {
+    height: 200px;
+    width: auto;
+    text-align: center;
+}
+.dshboard-title{
+    text-align: center;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+.logout {
+    text-align: right;
+}
+.logout:hover {
+    cursor: pointer;
+    color: red;
+}
+.card {
+    flex: 1;
+}
+.container {
+    text-align: center;
+}
+.fas {
+    font-size: 18px;
+    margin-right: 12px;
+}
