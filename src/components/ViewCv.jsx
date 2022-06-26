@@ -5,6 +5,7 @@ import { getRequest } from "../api/Axios";
 import "../assets/style/signIn.css";
 
 export const ViewCv = (props) => {
+  const [color, setColor] = useState("bg-resumedefault");
   const [userFeilds, setuserFeilds] = useState({
     name: "",
     email: "",
@@ -22,6 +23,14 @@ export const ViewCv = (props) => {
     socialProfiles: [],
   });
 
+  const generatePdf = () => {
+    var doc = new jsPDF("p", "pt", "a4");
+    doc.html(document.querySelector("#content"), {
+      callback: function (pdf) {
+        pdf.save("mydf.pdf");
+      },
+    });
+  };
   const handleApiCallToListCvInfo = () => {
     getRequest(`getCvById/${props.match.params.id}/`).then((response) => {
       if (response.data.statusCode === 200) {
@@ -34,94 +43,65 @@ export const ViewCv = (props) => {
     handleApiCallToListCvInfo();
   }, []);
 
-  return (
-    <div className="fome-parent-container">
-      <div className="edit">
-        <h3 className="title"> User Resume</h3>
-        <form>
-          Name
-          <input
-            type="text"
-            placeholder="name..."
-            value={userFeilds.name}
-            name="name"
-          />
-          <input
-            type="email"
-            placeholder="email..."
-            value={userFeilds.email}
-            name="email"
-          />
-          <input
-            type="text"
-            placeholder="phone..."
-            value={userFeilds.phoneNumber}
-            name="phoneNumber"
-          />
-          <input
-            type="text"
-            placeholder="highesteducationqal..."
-            value={userFeilds.highestEducationQal}
-            name="highestEducationQal"
-          />
-          <input
-            type="text"
-            placeholder="collegeName..."
-            value={userFeilds.collegeName}
-            name="collegeName"
-          />
-          <input
-            type="text"
-            placeholder="orgName..."
-            value={userFeilds.orgName}
-            name="orgName"
-          />
-          <input
-            type="text"
-            placeholder="highesteducationqal..."
-            value={userFeilds.highestEducationQal}
-            name="highestEducationQal"
-          />
-          <input
-            type="text"
-            placeholder="ctc..."
-            value={userFeilds.ctc}
-            name="ctc"
-          />
-          <input
-            type="text"
-            placeholder="location..."
-            value={userFeilds.location}
-            name="location"
-          />
-          <input
-            type="text"
-            placeholder="designation..."
-            value={userFeilds.designation}
-            name="designation"
-          />
-          <button type="submit">submit</button>
-        </form>
-        <View />
-      </div>
-    </div>
-  );
-};
-
-export const View = () => {
-  const doc = new jsPDF();
-  const Foo = <ViewCv />;
-  const save = () => {
-    doc.html(ReactDOMServer.renderToStaticMarkup(Foo), {
-      callback: () => {
-        doc.save("myDocument.pdf");
-      },
-    });
+  const setBgColor = (color) => {
+    if (color) {
+      setColor(color);
+    }
   };
-
   return (
-    <div>
-      <button onClick={save}>save</button>
-    </div>
+    <>
+      <div className={color}>
+        <div className="color-btn">
+          <p
+            className="color-bt"
+            onClick={() => {
+              setBgColor("bg-resume2");
+            }}
+          >
+            Layout1
+          </p>
+          <p
+            className="color-bt"
+            onClick={() => {
+              setBgColor("bg-resume1");
+            }}
+          >
+            Layout2
+          </p>
+        </div>
+        <div id="content" className="fome-parent-resume">
+          <div className="view-result-resume">
+            <h3 className="title">{userFeilds.name} Resume</h3>
+            <div>
+              <p>
+                My Name is
+                {userFeilds.name}. I'am from {userFeilds.location} and iam
+                working as {userFeilds.designation} for
+                {userFeilds.orgName} from last few years. I have done my
+                {userFeilds.highestEducationQal} from {userFeilds.collegeName}.
+                My last ctc is {userFeilds.ctc}.
+              </p>
+              Contact Details
+              <p>
+                <span>Email : </span>
+                {userFeilds.email}
+              </p>
+              <p>
+                <span>Phone :</span>
+                {userFeilds.phoneNumber}
+              </p>
+            </div>
+          </div>
+        </div>
+        <button
+          className="downloud-btn"
+          onClick={() => {
+            generatePdf();
+          }}
+        >
+          Download
+        </button>
+      </div>
+    </>
   );
 };

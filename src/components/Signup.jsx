@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { postRequest } from "../api/Axios";
 import { GoogleLogin } from "./GoogleLogin";
 import { Link } from "react-router-dom";
@@ -11,7 +11,13 @@ export const SignUp = (props) => {
     password: "",
     phone: "",
   });
-
+  useEffect(() => {
+    const userId = localStorage.getItem("_id");
+    if (userId) {
+      props.history.push(`/dashboard/${userId}`);
+      window.location.reload();
+    }
+  }, []);
   const handleuserFeilds = (e) => {
     setuserFeilds({ ...userFeilds, [e.target.name]: e.target.value });
   };

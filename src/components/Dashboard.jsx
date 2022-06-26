@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../assets/style/card.css";
 import { getRequest } from "../api/Axios";
 import { CvCard } from "./CvCard";
-
+import { postRequest } from "../api/Axios";
 export const DashBoard = (props) => {
   const [cvData, setCvData] = useState([]);
 
@@ -24,14 +24,28 @@ export const DashBoard = (props) => {
 
   return (
     <div className="card-p-d">
-      <p
-        className="logout"
-        onClick={() => {
-          handleLogout();
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          padding: "8px 0",
         }}
       >
-        Logout
-      </p>
+        <i
+          class="fas create fa-plus-circle"
+          onClick={() => {
+            window.location.href = `/create/${props.match.params.id}`;
+          }}
+        ></i>
+        <span
+          className="logout"
+          onClick={() => {
+            handleLogout();
+          }}
+        >
+          Logout
+        </span>
+      </div>
       <h5 className="dshboard-title">
         {`Hello below are cv created by you.`}{" "}
       </h5>

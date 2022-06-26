@@ -32,6 +32,10 @@
     text-align: center;
 }
 .fas {
-    font-size: 18px;
+    font-size: 16px;
     margin-right: 12px;
+    cursor: pointer;
+}
+.create {
+    font-size: 26px;
 }

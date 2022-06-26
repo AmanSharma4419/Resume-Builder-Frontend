@@ -16,6 +16,7 @@ export const SignIn = (props) => {
     postRequest("signIn/", userFeilds).then((response) => {
       if (response.data.statusCode === 200) {
         const { _id } = response.data.data;
+        localStorage.setItem("_id", _id);
         localStorage.setItem("token", response.data.token);
         props.history.push(`/dashboard/${_id}`);
         window.location.reload();

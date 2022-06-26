@@ -8,6 +8,7 @@ import {SignUp} from "./components/SignUp"
 // import { NotFound } from './components/NotFound';
 import { DashBoard } from './components/DashBoard';
 import {EditCV} from "./components/EditCv"
+import { CreateCv } from './components/CreateCv';
 
 function App() {
 const [tokenVerification,setTokenVerification] =  useState(false)
@@ -23,7 +24,7 @@ const privateRoutePath = () => {
     <Route path="/dashboard/:id" component={DashBoard} />
     <Route path="/editCv/:id" component={EditCV} />
     <Route path="/view/:id" component={ViewCv} />
-
+    <Route path="/create/:id" component={CreateCv} />
     </>
   )
 }

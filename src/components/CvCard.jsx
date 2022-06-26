@@ -1,8 +1,16 @@
 import React from "react";
 import "../assets/style/card.css";
-
+import { deleteRequest } from "../api/Axios";
 export const CvCard = (props) => {
   const { name, designation, _id } = props.userInfo;
+  const deleteCv = () => {
+    deleteRequest(`deleteCv/${_id}/`).then((response) => {
+      if (response.data.statusCode === 200) {
+        alert("deleted successfully");
+        window.location.reload();
+      }
+    });
+  };
   return (
     <div className="card">
       <div className="container">
@@ -19,7 +27,12 @@ export const CvCard = (props) => {
             window.location.href = `/editCv/${_id}`;
           }}
         ></i>
-        <i class="fas fa-trash"></i>
+        <i
+          class="fas fa-trash"
+          onClick={() => {
+            deleteCv();
+          }}
+        ></i>
         <i
           class="fas fa-eye"
           onClick={() => {
