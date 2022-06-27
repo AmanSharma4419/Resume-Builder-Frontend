@@ -1,4 +1,3 @@
-import ReactDOMServer from "react-dom/server";
 import jsPDF from "jspdf";
 import React, { useState, useEffect } from "react";
 import { getRequest } from "../api/Axios";
@@ -48,6 +47,20 @@ export const ViewCv = (props) => {
       setColor(color);
     }
   };
+  const {
+    name,
+    email,
+    highestEducationQal,
+    orgName,
+    designation,
+    collegeName,
+    city,
+    skills,
+    percentage,
+    location,
+    ctc,
+    phoneNumber,
+  } = userFeilds;
   return (
     <>
       <div className={color}>
@@ -68,39 +81,41 @@ export const ViewCv = (props) => {
           >
             Layout2
           </p>
+          <p
+            className="downloud-btn"
+            onClick={() => {
+              generatePdf();
+            }}
+          >
+            Download
+          </p>
         </div>
+
         <div id="content" className="fome-parent-resume">
           <div className="view-result-resume">
             <h3 className="title">{userFeilds.name} Resume</h3>
             <div>
               <p>
                 My Name is
-                {userFeilds.name}. I'am from {userFeilds.location} and iam
-                working as {userFeilds.designation} for
-                {userFeilds.orgName} from last few years. I have done my
-                {userFeilds.highestEducationQal} from {userFeilds.collegeName}.
-                My last ctc is {userFeilds.ctc}.
+                {name}. I'am from {city}
+                {location} and iam working as {designation} for
+                {orgName} from last few years. I have done my
+                {highestEducationQal} from {collegeName} with {percentage}. i
+                have skills as defined {skills}
+                My last ctc is {ctc}.
               </p>
               Contact Details
               <p>
                 <span>Email : </span>
-                {userFeilds.email}
+                {email}
               </p>
               <p>
                 <span>Phone :</span>
-                {userFeilds.phoneNumber}
+                {phoneNumber}
               </p>
             </div>
           </div>
         </div>
-        <button
-          className="downloud-btn"
-          onClick={() => {
-            generatePdf();
-          }}
-        >
-          Download
-        </button>
       </div>
     </>
   );

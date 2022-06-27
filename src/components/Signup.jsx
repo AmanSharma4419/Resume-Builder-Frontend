@@ -87,14 +87,14 @@ export const SignUp = (props) => {
             name="password"
           />
           <button type="submit">submit</button>
-        </form>
-        <div className="title">
-          <a href="/login">login</a>
-          OR
-          <div>
-            <GoogleLogin />
+          <div className="title">
+            <a href="/login">login</a>
+            OR
+            <div>
+              <GoogleLogin />
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

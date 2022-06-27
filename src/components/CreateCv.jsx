@@ -15,10 +15,10 @@ export const CreateCv = (props) => {
     location: "",
     designation: "",
     ctc: "",
-    skills: [],
+    skills: "",
     projectLinks: [],
     socialProfiles: [],
-    userid: props.match.params.id,
+    userId: props.match.params.id,
   });
 
   const handleuserFeilds = (e) => {
@@ -29,7 +29,7 @@ export const CreateCv = (props) => {
     postRequest(`createCv/${props.match.params.id}/`, userFeilds).then(
       (response) => {
         if (response.data.statusCode === 200) {
-          window.location.reload();
+          window.location.href = `/dashboard/${props.match.params.id}`;
         }
       }
     );
@@ -122,6 +122,15 @@ export const CreateCv = (props) => {
           />
           <input
             type="text"
+            placeholder="percentage..."
+            value={userFeilds.percentage}
+            onChange={(e) => {
+              handleuserFeilds(e);
+            }}
+            name="percentage"
+          />
+          <input
+            type="text"
             placeholder="orgName..."
             value={userFeilds.orgName}
             onChange={(e) => {
@@ -149,12 +158,30 @@ export const CreateCv = (props) => {
           />
           <input
             type="text"
+            placeholder="city..."
+            value={userFeilds.city}
+            onChange={(e) => {
+              handleuserFeilds(e);
+            }}
+            name="city"
+          />
+          <input
+            type="text"
             placeholder="designation..."
             value={userFeilds.designation}
             onChange={(e) => {
               handleuserFeilds(e);
             }}
             name="designation"
+          />
+          <input
+            type="text"
+            placeholder="skills..."
+            value={userFeilds.skills}
+            onChange={(e) => {
+              handleuserFeilds(e);
+            }}
+            name="skills"
           />
           <button type="submit">submit</button>
         </form>

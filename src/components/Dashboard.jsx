@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../assets/style/card.css";
 import { getRequest } from "../api/Axios";
 import { CvCard } from "./CvCard";
-import { postRequest } from "../api/Axios";
 export const DashBoard = (props) => {
   const [cvData, setCvData] = useState([]);
 
@@ -24,6 +23,13 @@ export const DashBoard = (props) => {
 
   return (
     <div className="card-p-d">
+      <span> Create New Resume</span>
+      <i
+        class="fas create fa-plus-circle"
+        onClick={() => {
+          window.location.href = `/create/${props.match.params.id}`;
+        }}
+      ></i>
       <div
         style={{
           display: "flex",
@@ -31,12 +37,6 @@ export const DashBoard = (props) => {
           padding: "8px 0",
         }}
       >
-        <i
-          class="fas create fa-plus-circle"
-          onClick={() => {
-            window.location.href = `/create/${props.match.params.id}`;
-          }}
-        ></i>
         <span
           className="logout"
           onClick={() => {

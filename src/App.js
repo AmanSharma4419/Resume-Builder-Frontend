@@ -18,6 +18,7 @@ const handleTokenVerification = () => {
     setTokenVerification(response.data.isVerify)
   })
 }
+// Private routes
 const privateRoutePath = () => {
   return (
     <>
@@ -28,7 +29,7 @@ const privateRoutePath = () => {
     </>
   )
 }
-
+// Public routes
 const publicRoutePath = () => {
   return(
     <>
